@@ -1,158 +1,47 @@
-[![Express Logo](https://i.cloudup.com/zfY6lL7eFa-3000x3000.png)](http://expressjs.com/)
+# Building Subscription Service
 
-  Fast, unopinionated, minimalist web framework for [node](http://nodejs.org).
+## Summary 
 
-  [![NPM Version][npm-image]][npm-url]
-  [![NPM Downloads][downloads-image]][downloads-url]
-  [![Linux Build][ci-image]][ci-url]
-  [![Windows Build][appveyor-image]][appveyor-url]
-  [![Test Coverage][coveralls-image]][coveralls-url]
+This is the code example for the blog post [Building Serverless Subscription Service using Lambda@Edge](https://aws.amazon.com/blogs/networking-and-content-delivery/building-a-serverless-subscription-service-using-lambdaedge) 
+Our example application supports providing a custom experience for website visitors who sign in to the site, so we start by authenticating users when they navigate to the website in their browser. 
 
-```js
-const express = require('express')
-const app = express()
+## Step-by-Step Setup Guide
 
-app.get('/', function (req, res) {
-  res.send('Hello World')
-})
+-  First, install the serverless framework by following the instructions at this link: https://serverless.com/framework/docs/providers/aws/guide/quick-start/
 
-app.listen(3000)
+```sh
+$ npm install -g serverless
+$ git pull https://github.com/aws-samples/aws-serverless-subscription-service-node.git
+$ cd to the repository folder
+$ npm install package.json --save
+$ serverless deploy -v
 ```
 
-## Installation
+-  In the CloudFormation console, when the application is complete, click the output URL to verify the deployment.
 
-This is a [Node.js](https://nodejs.org/en/) module available through the
-[npm registry](https://www.npmjs.com/).
+-  In the paywall_edge_function folder, update the config.js file using the CloudFormation output. 
 
-Before installing, [download and install Node.js](https://nodejs.org/en/download/).
-Node.js 0.10 or higher is required.
+-  Update the config.js by replacing cloudfront-distro-id with your CloudFront distribution ID. 
 
-If this is a brand new project, make sure to create a `package.json` first with
-the [`npm init` command](https://docs.npmjs.com/creating-a-package-json-file).
-
-Installation is done using the
-[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
-
-```bash
-$ npm install express
+```sh
+config.web.rootPath = 'https://cloudfront-distro-id.execute-api.us-east-1.amazonaws.com/dev';
+config.web.hostName = 'cloudfront-distro-id.execute-api.us-east-1.amazonaws.com';
+config.web.headlessCmsUrl = 'https://cloudfront-distro-id.execute-api.us-east-1.amazonaws.com/dev/articlesexportall';
 ```
 
-Follow [our installing guide](http://expressjs.com/en/starter/installing.html)
-for more information.
+-  After you update the config.js file, create the Lambda zip file by using following commands:
 
-## Features
-
-  * Robust routing
-  * Focus on high performance
-  * Super-high test coverage
-  * HTTP helpers (redirection, caching, etc)
-  * View system supporting 14+ template engines
-  * Content negotiation
-  * Executable for generating applications quickly
-
-## Docs & Community
-
-  * [Website and Documentation](http://expressjs.com/) - [[website repo](https://github.com/expressjs/expressjs.com)]
-  * [#express](https://webchat.freenode.net/?channels=express) on freenode IRC
-  * [GitHub Organization](https://github.com/expressjs) for Official Middleware & Modules
-  * Visit the [Wiki](https://github.com/expressjs/express/wiki)
-  * [Google Group](https://groups.google.com/group/express-js) for discussion
-  * [Gitter](https://gitter.im/expressjs/express) for support and discussion
-
-**PROTIP** Be sure to read [Migrating from 3.x to 4.x](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x) as well as [New features in 4.x](https://github.com/expressjs/express/wiki/New-features-in-4.x).
-
-### Security Issues
-
-If you discover a security vulnerability in Express, please see [Security Policies and Procedures](Security.md).
-
-## Quick Start
-
-  The quickest way to get started with express is to utilize the executable [`express(1)`](https://github.com/expressjs/generator) to generate an application as shown below:
-
-  Install the executable. The executable's major version will match Express's:
-
-```bash
-$ npm install -g express-generator@4
+```sh
+npm install package.json --save
+zip paywall.zip *
 ```
+- More information about how to create a Lambda deployment package can be found in our [documentation](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-create-deployment-pkg.html)
 
-  Create the app:
+-  In the AWS Lambda console, create a new Lambda function. Use paywall.zip as the codebase for the function.
 
-```bash
-$ express /tmp/foo && cd /tmp/foo
-```
+-  In the CloudFront console, create a distribution following the steps in the blog post.
 
-  Install dependencies:
+- Under Add triggers, choose CloudFront, and then add viewer-request triggers for /login, /api/login, and /articles by adding cache behaviors for each one. You can find step-by-step instructions in our [documentation](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-edge-add-triggers.html)
 
-```bash
-$ npm install
-```
+- You can also refer the screenshots included in screenshots directory in the repository.
 
-  Start the server:
-
-```bash
-$ npm start
-```
-
-  View the website at: http://localhost:3000
-
-## Philosophy
-
-  The Express philosophy is to provide small, robust tooling for HTTP servers, making
-  it a great solution for single page applications, websites, hybrids, or public
-  HTTP APIs.
-
-  Express does not force you to use any specific ORM or template engine. With support for over
-  14 template engines via [Consolidate.js](https://github.com/tj/consolidate.js),
-  you can quickly craft your perfect framework.
-
-## Examples
-
-  To view the examples, clone the Express repo and install the dependencies:
-
-```bash
-$ git clone git://github.com/expressjs/express.git --depth 1
-$ cd express
-$ npm install
-```
-
-  Then run whichever example you want:
-
-```bash
-$ node examples/content-negotiation
-```
-
-## Tests
-
-  To run the test suite, first install the dependencies, then run `npm test`:
-
-```bash
-$ npm install
-$ npm test
-```
-
-## Contributing
-
-[Contributing Guide](Contributing.md)
-
-## People
-
-The original author of Express is [TJ Holowaychuk](https://github.com/tj)
-
-The current lead maintainer is [Douglas Christopher Wilson](https://github.com/dougwilson)
-
-[List of all contributors](https://github.com/expressjs/express/graphs/contributors)
-
-## License
-
-  [MIT](LICENSE)
-
-[ci-image]: https://img.shields.io/github/workflow/status/expressjs/express/ci/master.svg?label=linux
-[ci-url]: https://github.com/expressjs/express/actions?query=workflow%3Aci
-[npm-image]: https://img.shields.io/npm/v/express.svg
-[npm-url]: https://npmjs.org/package/express
-[downloads-image]: https://img.shields.io/npm/dm/express.svg
-[downloads-url]: https://npmcharts.com/compare/express?minimal=true
-[appveyor-image]: https://img.shields.io/appveyor/ci/dougwilson/express/master.svg?label=windows
-[appveyor-url]: https://ci.appveyor.com/project/dougwilson/express
-[coveralls-image]: https://img.shields.io/coveralls/expressjs/express/master.svg
-[coveralls-url]: https://coveralls.io/r/expressjs/express?branch=master

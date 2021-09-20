@@ -1,113 +1,61 @@
-# Express.js Community Contributing Guide 1.0
+# Contributing Guidelines
 
-The goal of this document is to create a contribution process that:
+Thank you for your interest in contributing to our project. Whether it's a bug report, new feature, correction, or additional 
+documentation, we greatly value feedback and contributions from our community.
 
-* Encourages new contributions.
-* Encourages contributors to remain involved.
-* Avoids unnecessary processes and bureaucracy whenever possible.
-* Creates a transparent decision making process that makes it clear how
-contributors can be involved in decision making.
+Please read through this document before submitting any issues or pull requests to ensure we have all the necessary 
+information to effectively respond to your bug report or contribution.
 
-## Vocabulary
 
-* A **Contributor** is any individual creating or commenting on an issue or pull request.
-* A **Committer** is a subset of contributors who have been given write access to the repository.
-* A **TC (Technical Committee)** is a group of committers representing the required technical
-expertise to resolve rare disputes.
-* A **Triager** is a subset of contributors who have been given triage access to the repository.
+## Reporting Bugs/Feature Requests
 
-## Logging Issues
+We welcome you to use the GitHub issue tracker to report bugs or suggest features.
 
-Log an issue for any question or problem you might have. When in doubt, log an issue, and
-any additional policies about what to include will be provided in the responses. The only
-exception is security disclosures which should be sent privately.
+When filing an issue, please check [existing open](https://github.com/aws-samples/aws-serverless-subscription-service-node/issues), or [recently closed](https://github.com/aws-samples/aws-serverless-subscription-service-node/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aclosed%20), issues to make sure somebody else hasn't already 
+reported the issue. Please try to include as much information as you can. Details like these are incredibly useful:
 
-Committers may direct you to another repository, ask for additional clarifications, and
-add appropriate metadata before the issue is addressed.
+* A reproducible test case or series of steps
+* The version of our code being used
+* Any modifications you've made relevant to the bug
+* Anything unusual about your environment or deployment
 
-Please be courteous and respectful. Every participant is expected to follow the
-project's Code of Conduct.
 
-## Contributions
+## Contributing via Pull Requests
+Contributions via pull requests are much appreciated. Before sending us a pull request, please ensure that:
 
-Any change to resources in this repository must be through pull requests. This applies to all changes
-to documentation, code, binary files, etc. Even long term committers and TC members must use
-pull requests.
+1. You are working against the latest source on the *master* branch.
+2. You check existing open, and recently merged, pull requests to make sure someone else hasn't addressed the problem already.
+3. You open an issue to discuss any significant work - we would hate for your time to be wasted.
 
-No pull request can be merged without being reviewed.
+To send us a pull request, please:
 
-For non-trivial contributions, pull requests should sit for at least 36 hours to ensure that
-contributors in other timezones have time to review. Consideration should also be given to
-weekends and other holiday periods to ensure active committers all have reasonable time to
-become involved in the discussion and review process if they wish.
+1. Fork the repository.
+2. Modify the source; please focus on the specific change you are contributing. If you also reformat all the code, it will be hard for us to focus on your change.
+3. Ensure local tests pass.
+4. Commit to your fork using clear commit messages.
+5. Send us a pull request, answering any default questions in the pull request interface.
+6. Pay attention to any automated CI failures reported in the pull request, and stay involved in the conversation.
 
-The default for each contribution is that it is accepted once no committer has an objection.
-During a review, committers may also request that a specific contributor who is most versed in a
-particular area gives a "LGTM" before the PR can be merged. There is no additional "sign off"
-process for contributions to land. Once all issues brought by committers are addressed it can
-be landed by any committer.
+GitHub provides additional document on [forking a repository](https://help.github.com/articles/fork-a-repo/) and 
+[creating a pull request](https://help.github.com/articles/creating-a-pull-request/).
 
-In the case of an objection being raised in a pull request by another committer, all involved
-committers should seek to arrive at a consensus by way of addressing concerns being expressed
-by discussion, compromise on the proposed change, or withdrawal of the proposed change.
 
-If a contribution is controversial and committers cannot agree about how to get it to land
-or if it should land then it should be escalated to the TC. TC members should regularly
-discuss pending contributions in order to find a resolution. It is expected that only a
-small minority of issues be brought to the TC for resolution and that discussion and
-compromise among committers be the default resolution mechanism.
+## Finding contributions to work on
+Looking at the existing issues is a great way to find something to contribute on. As our projects, by default, use the default GitHub issue labels (enhancement/bug/duplicate/help wanted/invalid/question/wontfix), looking at any ['help wanted'](https://github.com/aws-samples/aws-serverless-subscription-service-node/labels/help%20wanted) issues is a great place to start. 
 
-## Becoming a Triager
 
-Anyone can become a triager! Read more about the process of being a triager in
-[the triage process document](Triager-Guide.md).
+## Code of Conduct
+This project has adopted the [Amazon Open Source Code of Conduct](https://aws.github.io/code-of-conduct). 
+For more information see the [Code of Conduct FAQ](https://aws.github.io/code-of-conduct-faq) or contact 
+opensource-codeofconduct@amazon.com with any additional questions or comments.
 
-[Open an issue in `expressjs/express` repo](https://github.com/expressjs/express/issues/new)
-to request the triage role. State that you have read and agree to the
-[Code of Conduct](Code-Of-Conduct.md) and details of the role.
 
-Here is an example issue content you can copy and paste:
+## Security issue notifications
+If you discover a potential security issue in this project we ask that you notify AWS/Amazon Security via our [vulnerability reporting page](http://aws.amazon.com/security/vulnerability-reporting/). Please do **not** create a public github issue.
 
-```
-Title: Request triager role for <your GitHub username>
 
-I have read and understood the project's Code of Conduct.
-I also have read and understood the process and best practices around Express triaging.
+## Licensing
 
-I request for a triager role for the following GitHub organizations:
+See the [LICENSE](https://github.com/aws-samples/aws-serverless-subscription-service-node/blob/master/LICENSE) file for our project's licensing. We will ask you to confirm the licensing of your contribution.
 
-jshttp
-pillarjs
-express
-```
-
-Once you have opened your issue, a member of the TC will add you to the `triage` team in
-the organizations requested. They will then close the issue.
-
-Happy triaging!
-
-## Becoming a Committer
-
-All contributors who land a non-trivial contribution should be on-boarded in a timely manner,
-and added as a committer, and be given write access to the repository.
-
-Committers are expected to follow this policy and continue to send pull requests, go through
-proper review, and have other committers merge their pull requests.
-
-## TC Process
-
-The TC uses a "consensus seeking" process for issues that are escalated to the TC.
-The group tries to find a resolution that has no open objections among TC members.
-If a consensus cannot be reached that has no objections then a majority wins vote
-is called. It is also expected that the majority of decisions made by the TC are via
-a consensus seeking process and that voting is only used as a last-resort.
-
-Resolution may involve returning the issue to committers with suggestions on how to
-move forward towards a consensus. It is not expected that a meeting of the TC
-will resolve all issues on its agenda during that meeting and may prefer to continue
-the discussion happening among the committers.
-
-Members can be added to the TC at any time. Any committer can nominate another committer
-to the TC and the TC uses its standard consensus seeking process to evaluate whether or
-not to add this new member. Members who do not participate consistently at the level of
-a majority of the other members are expected to resign.
+We may ask you to sign a [Contributor License Agreement (CLA)](http://en.wikipedia.org/wiki/Contributor_License_Agreement) for larger changes.
